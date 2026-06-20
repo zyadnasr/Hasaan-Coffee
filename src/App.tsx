@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Coffee, MapPin, Phone, MessageCircle, Clock, Star, ShieldCheck, ThumbsUp, Medal, Mail, BoxSelect, CheckCircleIcon, Nut, SlidersHorizontal, ChevronDown, Users, Award, ShoppingBag, StarHalf, X, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence, useInView, animate } from 'motion/react';
+import heroImage from "./assets/images/hassan_coffee_hero_clean_1781963541780.jpg";
 
 const phoneNumber = "01281515233";
 const whatsappNumber = "01063053320";
@@ -279,7 +280,7 @@ export default function App() {
         {/* Background Layers */}
         <motion.div className="absolute inset-0 z-0 origin-center" style={{ y: bgY, scale: bgScale }}>
           <img 
-            src="/src/assets/images/hassan_coffee_hero_clean_1781963541780.jpg" 
+            src={heroImage}
             alt="Hassan Coffee Premium Package" 
             className="w-full h-full object-cover select-none pointer-events-none object-center"
           />
