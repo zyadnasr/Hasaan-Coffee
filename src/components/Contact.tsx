@@ -76,7 +76,7 @@ export default function Contact() {
             {/* Map Area */}
             <div className="lg:w-1/2 min-h-[300px] md:min-h-[400px] lg:min-h-full bg-brand-dark p-6 md:p-8 flex flex-col justify-center items-center relative border-t lg:border-t-0 lg:border-l border-brand-light/5">
                <div className="absolute inset-0 bg-brand-secondary/40 mix-blend-overlay" />
-               <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2671&auto=format&fit=crop" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity" alt="map bg" />
+               <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2671&auto=format&fit=crop" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity" alt="map bg" />
                
                <div className="glass-dark p-4 md:p-10 rounded-2xl md:rounded-[2.5rem] relative z-10 max-w-sm w-full border border-brand-primary/20 shadow-2xl backdrop-blur-3xl hover:border-brand-primary/50 transition-colors duration-500">
                   <div className="flex items-center md:flex-col md:text-center text-start gap-4 md:gap-0">
