@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'motion/react';
 import { Phone, MessageCircle } from 'lucide-react';
-import { heroImage } from '../assets/images/hero-section.webp'
+import heroImage from '../assets/images/hero-section.webp'
 
 interface HeroProps {
   heroRef: React.RefObject<HTMLElement | null>;
