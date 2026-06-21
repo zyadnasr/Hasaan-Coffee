@@ -22,6 +22,7 @@ export default function About() {
                 src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?q=80&w=2670&auto=format&fit=crop" 
                 alt="Hassan Coffee Shop Setup"
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent" />
