@@ -11,7 +11,7 @@ interface HeaderProps {
 export default function Header({ whatsappNumber, isHeroInView, hasMounted }: HeaderProps) {
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-brand-primary/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#120a06]/40 backdrop-blur-2xl backdrop-saturate-150 border-b border-[#c8a54b]/10 shadow-lg">
         <div className="container mx-auto px-4 md:px-6 h-24 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
