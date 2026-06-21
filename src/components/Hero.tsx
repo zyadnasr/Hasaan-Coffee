@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'motion/react';
 import { Phone, MessageCircle } from 'lucide-react';
+import heroImage form '../assets/images/hero-section.webp'
 
 interface HeroProps {
   heroRef: React.RefObject<HTMLElement | null>;
@@ -35,7 +36,7 @@ export default function Hero({
     <section ref={heroRef} className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden flex flex-col justify-center min-h-[90vh]">
       <motion.div className="absolute inset-0 z-0 origin-center" style={{ y: bgY, scale: bgScale }}>
         <img 
-          src="/src/assets/images/hassan_coffee_hero_clean_1781963541780.jpg" 
+          src={heroImage}
           alt="Hassan Coffee Premium Package" 
           className="w-full h-full object-cover select-none pointer-events-none object-center"
         />
