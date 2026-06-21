@@ -34,6 +34,7 @@ export default function Gallery() {
                 src={imgUrl} 
                 alt={`Hassan Coffee Gallery Image ${index + 1}`} 
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
               />
             </motion.div>
