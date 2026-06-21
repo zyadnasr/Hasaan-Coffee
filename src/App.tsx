@@ -42,19 +42,24 @@ export default function App() {
   const [hasShownExitPopup, setHasShownExitPopup] = useState(false);
 
   useEffect(() => {
-    if (window.location.pathname !== '/') {
+    const path = window.location.pathname;
+
+    if (path !== "/" && path !== "/Hasaan-Coffee/") {
       setIs404(true);
       setIsPreloading(false);
     } else {
       const handleLoad = () => setIsPreloading(false);
-      if (document.readyState === 'complete') {
+
+      if (document.readyState === "complete") {
         setIsPreloading(false);
       } else {
-        window.addEventListener('load', handleLoad);
+        window.addEventListener("load", handleLoad);
       }
+
       const timer = setTimeout(() => setIsPreloading(false), 3000);
+
       return () => {
-        window.removeEventListener('load', handleLoad);
+        window.removeEventListener("load", handleLoad);
         clearTimeout(timer);
       };
     }
