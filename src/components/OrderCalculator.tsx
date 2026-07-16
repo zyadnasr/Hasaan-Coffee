@@ -1,12 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Coffee, MessageCircle, ChevronDown, CheckCircleIcon, BoxSelect, Star } from 'lucide-react';
 
 interface OrderCalculatorProps {
   coffeeType: string;
   setCoffeeType: (type: string) => void;
-  quantity: number | string;
-  setQuantity: (quantity: number | string) => void;
+  quantity: number;
+  setQuantity: (quantity: number) => void;
   quantityDropdownOpen: boolean;
   setQuantityDropdownOpen: (open: boolean) => void;
   coffeePrices: Record<string, number>;
@@ -39,13 +39,22 @@ export default function OrderCalculator({
         setQuantityDropdownOpen(false);
       }
     }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setQuantityDropdownOpen(false);
+      }
+    }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [setQuantityDropdownOpen]);
 
   return (
     <section className="py-24 bg-brand-dark/95 relative overflow-hidden" id="calculator">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2694&auto=format&fit=crop')] opacity-[0.02] mix-blend-screen bg-cover bg-center pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2694&auto=format&fit=crop')] opacity-[0.02] mix-blend-screen bg-cover bg-center pointer-events-none" aria-hidden="true" />
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
@@ -71,7 +80,7 @@ export default function OrderCalculator({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-serif font-bold text-white mb-4"
+              className="text-4xl md:text-5xl font-serif font-bold text-white mb-4 tracking-tight"
             >
               احسب <span className="text-gradient-gold">سعر طلبك</span>
             </motion.h2>
@@ -96,11 +105,12 @@ export default function OrderCalculator({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
               {/* Coffee Type Selection */}
               <div className="flex flex-col gap-3">
-                <label className="text-brand-light/80 font-bold ml-1 flex items-center gap-2">
+                <label htmlFor="coffee-type" className="text-brand-light/80 font-bold ml-1 flex items-center gap-2">
                   <Coffee size={18} className="text-brand-primary" /> نوع البن
                 </label>
                 <div className="relative">
                   <select 
+                    id="coffee-type"
                     value={coffeeType}
                     onChange={(e) => setCoffeeType(e.target.value)}
                     className="w-full bg-brand-dark/80 border border-brand-primary/20 rounded-xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-all pr-12 cursor-pointer font-bold"
@@ -120,25 +130,28 @@ export default function OrderCalculator({
 
               {/* Quantity Selection */}
               <div className="flex flex-col gap-3 relative" ref={quantityRef}>
-                <label className="text-brand-light/80 font-bold ml-1 w-full text-right flex items-center gap-2">
+                <label htmlFor="quantity" className="text-brand-light/80 font-bold ml-1 w-full text-right flex items-center gap-2">
                   <BoxSelect size={18} className="text-brand-primary" /> الكمية (بالكيلو)
                 </label>
                 <div 
                   className={`relative w-full bg-brand-dark/80 border ${quantityDropdownOpen ? 'border-brand-primary ring-1 ring-brand-primary' : 'border-brand-primary/20'} rounded-xl transition-all flex items-center`}
                 >
                   <input 
+                    id="quantity"
                     type="number"
                     min="0"
                     step="0.125"
                     value={quantity}
-                    onChange={(e) => setQuantity(e.target.value === '' ? '' : Number(e.target.value))}
+                    onChange={(e) => setQuantity(e.target.value === '' ? 0 : Number(e.target.value))}
                     onFocus={() => setQuantityDropdownOpen(true)}
-                    className="w-full bg-transparent px-5 py-4 text-white focus:outline-none text-right font-bold"
+                    className="w-full bg-transparent px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-xl text-right font-bold"
                     placeholder="اكتب الكمية أو اختر وزنًا جاهزًا"
                   />
                   <button 
                     type="button"
                     onClick={() => setQuantityDropdownOpen(!quantityDropdownOpen)}
+                    aria-label={quantityDropdownOpen ? 'إغلاق قائمة الأوزان' : 'فتح قائمة الأوزان'}
+                    aria-expanded={quantityDropdownOpen}
                     className="absolute left-0 top-0 bottom-0 px-4 text-brand-primary flex items-center justify-center cursor-pointer hover:bg-brand-primary/10 rounded-l-xl transition-colors"
                   >
                     <ChevronDown size={20} className={`transition-transform duration-300 ${quantityDropdownOpen ? 'rotate-180' : ''}`} />
@@ -189,7 +202,7 @@ export default function OrderCalculator({
               </div>
               <div className="flex justify-between items-center mb-6 text-brand-light/70 text-lg border-b border-white/5 pb-6">
                 <span>التوصيل:</span>
-                <span className="font-bold text-white font-mono">{Number(quantity) > 0 ? deliveryFee : 0} جنيه</span>
+                <span className="font-bold text-white font-mono">{quantity > 0 ? deliveryFee : 0} جنيه</span>
               </div>
               <div className="flex justify-between items-center text-xl md:text-2xl font-bold">
                 <span className="text-white">الإجمالي:</span>
@@ -207,15 +220,15 @@ export default function OrderCalculator({
             {/* CTA Button */}
             <button 
               onClick={handleOrderCalculatorWhatsapp}
-              disabled={!quantity || Number(quantity) <= 0}
-              className="w-full flex items-center justify-center gap-3 bg-gradient-gold text-brand-dark py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+              disabled={quantity <= 0}
+              className="w-full flex items-center justify-center gap-3 bg-gradient-gold text-brand-dark py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_25px_rgba(212,175,55,0.35)] transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
             >
               <MessageCircle size={22} />
               اطلب الآن عبر واتساب
             </button>
 
             <div className="mt-6 text-center">
-              <p className="text-brand-light/40 text-xs flex justify-center items-center gap-1.5 opacity-80 font-light max-w-sm mx-auto leading-relaxed">
+              <p className="text-brand-light/60 text-xs flex justify-center items-center gap-1.5 opacity-80 font-light max-w-sm mx-auto leading-relaxed">
                 <Star size={10} className="text-brand-primary" />
                 *نلتزم بتقديم أفضل جودة بأفضل سعر، لذلك يتم تحديث الأسعار بشكل دوري وفقًا لأسعار البن اليومية.*
                 <Star size={10} className="text-brand-primary" />

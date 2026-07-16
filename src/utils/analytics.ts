@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
+    gtag?: (...args: [string, string, Record<string, string>]) => void;
   }
 }
 

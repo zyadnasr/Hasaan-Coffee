@@ -1,6 +1,7 @@
-import React from 'react';
+
 import { motion } from 'motion/react';
 import { Coffee, MessageCircle } from 'lucide-react';
+import { getWhatsAppUrl } from '../data/config';
 
 interface NotFoundProps {
   whatsappNumber: string;
@@ -8,8 +9,8 @@ interface NotFoundProps {
 
 export default function NotFound({ whatsappNumber }: NotFoundProps) {
   return (
-    <div className="min-h-screen noise-bg font-sans bg-brand-dark text-brand-light flex items-center justify-center p-6 relative overflow-hidden" dir="rtl">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2694&auto=format&fit=crop')] opacity-[0.05] mix-blend-screen bg-cover bg-center pointer-events-none" />
+    <div className="min-h-screen noise-bg font-sans bg-brand-dark text-brand-light flex items-center justify-center p-6 relative overflow-hidden" dir="rtl" role="main" aria-label="صفحة غير موجودة">
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2694&auto=format&fit=crop')] opacity-[0.05] mix-blend-screen bg-cover bg-center pointer-events-none" aria-hidden="true" />
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -20,10 +21,10 @@ export default function NotFound({ whatsappNumber }: NotFoundProps) {
         <h2 className="text-2xl md:text-3xl font-bold text-gradient-gold mb-4 mt-8">يبدو أنك ضللت الطريق ☕</h2>
         <p className="text-brand-light/70 mb-10 text-lg">الصفحة التي تبحث عنها غير موجودة.</p>
         <div className="flex flex-col gap-4">
-          <button onClick={() => window.location.href = '/'} className="flex items-center gap-2 bg-gradient-gold text-brand-dark w-full py-4 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all justify-center text-lg">
+          <button onClick={() => window.location.href = '/Hasaan-Coffee/'} className="flex items-center gap-2 bg-gradient-gold text-brand-dark w-full py-4 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] transition-all duration-300 hover:-translate-y-0.5 justify-center text-lg">
             العودة للرئيسية
           </button>
-          <button onClick={() => window.open(`https://wa.me/2${whatsappNumber}`, '_blank')} className="glass border border-brand-light/10 hover:border-brand-primary/40 hover:bg-brand-primary/10 text-white w-full py-4 rounded-xl font-bold transition-all justify-center flex items-center gap-2 text-lg">
+          <button onClick={() => window.open(getWhatsAppUrl(whatsappNumber), '_blank')} className="glass border border-brand-light/[0.08] hover:border-brand-primary/25 hover:bg-brand-primary/10 text-white w-full py-4 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5 justify-center flex items-center gap-2 text-lg">
             التواصل عبر واتساب
             <MessageCircle size={20} />
           </button>

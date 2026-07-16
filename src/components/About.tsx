@@ -1,12 +1,12 @@
-import React from 'react';
+
 import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 
 export default function About() {
   return (
     <section id="about" className="py-32 bg-brand-dark relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-secondary/40 rounded-full blur-[150px] mix-blend-multiply pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-secondary/40 rounded-full blur-[150px] mix-blend-multiply pointer-events-none" aria-hidden="true" />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row gap-20 items-center">
@@ -20,13 +20,13 @@ export default function About() {
             <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-brand-light/10 aspect-[4/5] object-cover group">
                <img 
                 src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?q=80&w=2670&auto=format&fit=crop" 
-                alt="Hassan Coffee Shop Setup"
+                alt="داخلية متجر حسن كوفي مع أجواء محمصة البن"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent" />
-              <div className="absolute inset-0 border-[1px] border-brand-primary/20 rounded-[2rem] z-20 m-4 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent" aria-hidden="true" />
+              <div className="absolute inset-0 border-[1px] border-brand-primary/20 rounded-[2rem] z-20 m-4 pointer-events-none" aria-hidden="true" />
               <div className="absolute bottom-8 right-8 left-8 text-center z-30">
                 <p className="font-serif text-2xl italic font-bold text-gradient-gold">"أجود أنواع البن، وأفضل طحن"</p>
               </div>
@@ -71,7 +71,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="space-y-6 text-brand-light/70 text-lg leading-relaxed font-light"
+              className="space-y-6 text-brand-light/60 text-lg leading-[1.9] font-light"
             >
               <p>
                 في "حسن كوفي"، نحن لا نبيع مجرد قهوة، بل نقدم خلاصة خبرة وشغف في اختيار أفضل حقول البن حول العالم وضمان وصولها إليك بأعلى معايير الجودة.
@@ -92,7 +92,7 @@ export default function About() {
               className="mt-12 flex flex-wrap gap-8"
             >
               <div className="glass-dark px-6 py-4 rounded-2xl border-l-2 border-l-brand-primary flex-1 min-w-[140px]">
-                <h4 className="text-3xl font-serif font-bold text-white mb-1">+1000</h4>
+                <h4 className="text-3xl font-serif font-bold text-white mb-1">+2000</h4>
                 <p className="text-xs text-brand-primary uppercase tracking-wider">عميل سعيد</p>
               </div>
               <div className="glass-dark px-6 py-4 rounded-2xl border-l-2 border-l-brand-primary flex-1 min-w-[140px]">

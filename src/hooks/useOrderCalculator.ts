@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { trackWhatsappClick } from '../utils/analytics';
-
-const whatsappNumber = "01063053320";
+import { config, getWhatsAppUrl } from '../data/config';
 
 export const coffeePrices: Record<string, number> = {
   'بن سادة': 560,
@@ -17,20 +16,18 @@ export const quantityPresets = [
   { label: 'كيلو كامل (1 كجم)', value: 1 }
 ];
 
-export const deliveryFee = 20;
-
 export function useOrderCalculator() {
   const [coffeeType, setCoffeeType] = useState('بن سادة');
-  const [quantity, setQuantity] = useState<number | string>(1);
+  const [quantity, setQuantity] = useState<number>(1);
   const [quantityDropdownOpen, setQuantityDropdownOpen] = useState(false);
 
-  const coffeePriceTotal = coffeePrices[coffeeType] * (Number(quantity) || 0);
-  const orderTotal = coffeePriceTotal + (Number(quantity) > 0 ? deliveryFee : 0);
+  const coffeePriceTotal = coffeePrices[coffeeType] * quantity;
+  const orderTotal = coffeePriceTotal + (quantity > 0 ? config.deliveryFee : 0);
 
   const handleOrderCalculatorWhatsapp = () => {
     trackWhatsappClick(`حاسبة الطلب - ${coffeeType}`);
-    const message = `السلام عليكم،\nأرغب في طلب:\n\nالنوع: ${coffeeType}\nالكمية: ${quantity} كيلو\n\nسعر البن: ${coffeePriceTotal.toFixed(0)} جنيه\nالتوصيل: ${deliveryFee} جنيه\nالإجمالي: ${orderTotal.toFixed(0)} جنيه\n\nيرجى التواصل معي لإتمام الطلب.`;
-    window.open(`https://wa.me/2${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    const message = `السلام عليكم،\nأرغب في طلب:\n\nالنوع: ${coffeeType}\nالكمية: ${quantity} كيلو\n\nسعر البن: ${coffeePriceTotal.toFixed(0)} جنيه\nالتوصيل: ${config.deliveryFee} جنيه\nالإجمالي: ${orderTotal.toFixed(0)} جنيه\n\nيرجى التواصل معي لإتمام الطلب.`;
+    window.open(getWhatsAppUrl(config.whatsappNumber, message), '_blank');
   };
 
   return {
@@ -42,7 +39,7 @@ export function useOrderCalculator() {
     setQuantityDropdownOpen,
     coffeePrices,
     quantityPresets,
-    deliveryFee,
+    deliveryFee: config.deliveryFee,
     coffeePriceTotal,
     orderTotal,
     handleOrderCalculatorWhatsapp

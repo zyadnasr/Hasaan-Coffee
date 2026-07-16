@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { useScroll, useTransform, useInView } from 'motion/react';
+import { useScroll, useTransform, useInView, useReducedMotion } from 'motion/react';
 import { MessageCircle } from 'lucide-react';
 
 import Preloader from './components/Preloader';
@@ -7,7 +7,8 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import ExitPopup from './components/ExitPopup';
 import NotFound from './components/NotFound';
-import { config } from './data/config';
+import ErrorBoundary from './components/ErrorBoundary';
+import { config, getWhatsAppUrl } from './data/config';
 import { useOrderCalculator } from './hooks/useOrderCalculator';
 
 // Lazy loading below-the-fold sections
@@ -22,13 +23,14 @@ const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
 export default function App() {
+  const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
-  const bgY = useTransform(scrollY, [0, 1000], ['0%', '20%']);
-  const bgScale = useTransform(scrollY, [0, 1000], [1, 1.1]);
-  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
-  const heroY = useTransform(scrollY, [0, 500], ['0%', '20%']);
-  const overlayOpacity = useTransform(scrollY, [0, 500], [0, 0.7]);
-  const smokeY = useTransform(scrollY, [0, 1000], ['0%', '-50%']);
+  const bgY = useTransform(scrollY, [0, 1000], [prefersReducedMotion ? '0%' : '0%', prefersReducedMotion ? '0%' : '20%']);
+  const bgScale = useTransform(scrollY, [0, 1000], [1, prefersReducedMotion ? 1 : 1.1]);
+  const heroOpacity = useTransform(scrollY, [0, 500], [1, prefersReducedMotion ? 1 : 0]);
+  const heroY = useTransform(scrollY, [0, 500], ['0%', prefersReducedMotion ? '0%' : '20%']);
+  const overlayOpacity = useTransform(scrollY, [0, 500], [0, prefersReducedMotion ? 0 : 0.7]);
+  const smokeY = useTransform(scrollY, [0, 1000], ['0%', prefersReducedMotion ? '0%' : '-50%']);
 
   const orderCalculator = useOrderCalculator();
   
@@ -88,6 +90,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen noise-bg font-sans bg-brand-dark text-brand-light selection:bg-brand-primary selection:text-brand-dark">
+      <a href="#main-content" className="skip-link">انتقل إلى المحتوى الرئيسي</a>
       <Header 
         whatsappNumber={config.whatsappNumber}
         isHeroInView={isHeroInView}
@@ -107,27 +110,35 @@ export default function App() {
         whatsappNumber={config.whatsappNumber}
       />
 
-      <Suspense fallback={<div className="py-24 text-center glass text-brand-primary">جاري التحميل...</div>}>
-        <OrderCalculator {...orderCalculator} />
-        <Services whatsappNumber={config.whatsappNumber} />
-        <Stats />
-        <About />
-        <Quality />
-        <Testimonials />
-        <Gallery />
-        <Contact />
+      <main id="main-content">
+        <ErrorBoundary>
+          <Suspense fallback={<div className="py-24 text-center glass text-brand-primary" role="status">جاري التحميل...</div>}>
+          <OrderCalculator {...orderCalculator} />
+          <Services whatsappNumber={config.whatsappNumber} />
+          <Stats />
+          <About />
+          <Quality />
+          <Testimonials />
+          <Gallery />
+          <Contact />
+          </Suspense>
+        </ErrorBoundary>
+      </main>
+
+      <Suspense fallback={null}>
         <Footer />
       </Suspense>
 
       {/* Mobile Sticky WhatsApp */}
       <div className="md:hidden fixed bottom-6 right-6 z-50">
         <a 
-          href={`https://wa.me/2${config.whatsappNumber}?text=${encodeURIComponent('السلام عليكم، أريد الاستفسار عن منتجات حسن كوفي.')}`}
+          href={getWhatsAppUrl(config.whatsappNumber, 'السلام عليكم، أريد الاستفسار عن منتجات حسن كوفي.')}
           target="_blank"
           rel="noreferrer"
-          className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:scale-105 active:scale-95 transition-transform relative group"
+          aria-label="تواصل عبر واتساب"
+          className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:-translate-y-0.5 active:scale-[0.95] transition-all duration-300 relative group"
         >
-          <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-40 duration-1000" />
+          <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-40 duration-1000" aria-hidden="true" />
           <MessageCircle size={28} className="relative z-10" />
         </a>
       </div>

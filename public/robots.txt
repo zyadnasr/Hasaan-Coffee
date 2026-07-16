@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zyadnasr.github.io/Hasaan-Coffee/sitemap.xml

@@ -1,6 +1,15 @@
-import { Users, Award, ShoppingBag, StarHalf } from 'lucide-react';
+import { type LucideIcon, Users, Award, ShoppingBag, StarHalf } from 'lucide-react';
 
-export const stats = [
+export interface Stat {
+  icon: LucideIcon;
+  value: number;
+  prefix: string;
+  suffix: string;
+  title: string;
+  decimals: number;
+}
+
+export const stats: Stat[] = [
   { icon: Users, value: 2000, prefix: "+", title: "عميل سعيد", decimals: 0, suffix: "" },
   { icon: Award, value: 5, prefix: "+", title: "سنوات من الخبرة", decimals: 0, suffix: "" },
   { icon: ShoppingBag, value: 5000, prefix: "+", title: "كيلو بن تم بيعه", decimals: 0, suffix: "" },

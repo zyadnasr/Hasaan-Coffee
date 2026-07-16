@@ -1,14 +1,14 @@
-import React from 'react';
+
 import { motion } from 'motion/react';
 import { Phone, MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
-import { config } from '../data/config';
+import { config, getWhatsAppUrl } from '../data/config';
 
 export default function Contact() {
   const { phoneNumber, whatsappNumber, address, mapLink, email } = config;
 
   return (
     <section id="contact" className="py-16 md:py-32 bg-brand-dark relative overflow-hidden flex flex-col items-center">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0idHJhbnNwYXJlbnQiPjwvcmVjdD4KPHBhdGggZD0iTTAgNDBMNDAgMEgwem00MCA0MEwwIDBoNDB6IiBmaWxsPSJyZ2JhKDIxMiwgMTc1LCA1NSwgMC4wNSkiPjwvcGF0aD4KPC9zdmc+')] opacity-50 z-0" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0idHJhbnNwYXJlbnQiPjwvcmVjdD4KPHBhdGggZD0iTTAgNDBMNDAgMEgwem00MCA0MEwwIDBoNDB6IiBmaWxsPSJyZ2JhKDIxMiwgMTc1LCA1NSwgMC4wNSkiPjwvcGF0aD4KPC9zdmc+')] opacity-50 z-0" aria-hidden="true" />
       <div className="container mx-auto px-4 md:px-6 relative z-10 w-full">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
@@ -21,9 +21,9 @@ export default function Contact() {
             
             {/* Contact Info */}
             <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 relative">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
               
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 text-white leading-tight text-center md:text-start">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 text-white leading-tight text-center md:text-start tracking-tight">
                 اطلب <span className="text-gradient-gold">قهوتك</span> الآن
               </h2>
               <p className="text-brand-light/60 mb-6 md:mb-12 text-base md:text-xl font-light text-center md:text-start">
@@ -41,7 +41,7 @@ export default function Contact() {
                   </div>
                 </a>
                 
-                <a href={`https://wa.me/2${whatsappNumber}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 md:gap-6 group bg-white/5 md:bg-transparent p-4 md:p-4 rounded-2xl hover:bg-green-500/5 border border-white/5 md:border-transparent hover:border-green-500/20 transition-all w-full">
+                <a href={getWhatsAppUrl(whatsappNumber)} target="_blank" rel="noreferrer" className="flex items-center gap-4 md:gap-6 group bg-white/5 md:bg-transparent p-4 md:p-4 rounded-2xl hover:bg-green-500/5 border border-white/5 md:border-transparent hover:border-green-500/20 transition-all w-full">
                   <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.3)] md:shadow-[0_0_20px_rgba(34,197,94,0.3)] rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-500">
                     <MessageCircle size={20} className="md:w-6 md:h-6" />
                   </div>
@@ -75,13 +75,13 @@ export default function Contact() {
 
             {/* Map Area */}
             <div className="lg:w-1/2 min-h-[300px] md:min-h-[400px] lg:min-h-full bg-brand-dark p-6 md:p-8 flex flex-col justify-center items-center relative border-t lg:border-t-0 lg:border-l border-brand-light/5">
-               <div className="absolute inset-0 bg-brand-secondary/40 mix-blend-overlay" />
-               <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2671&auto=format&fit=crop" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity" alt="map bg" />
+               <div className="absolute inset-0 bg-brand-secondary/40 mix-blend-overlay" aria-hidden="true" />
+               <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2671&auto=format&fit=crop" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity" alt="" aria-hidden="true" />
                
                <div className="glass-dark p-4 md:p-10 rounded-2xl md:rounded-[2.5rem] relative z-10 max-w-sm w-full border border-brand-primary/20 shadow-2xl backdrop-blur-3xl hover:border-brand-primary/50 transition-colors duration-500">
                   <div className="flex items-center md:flex-col md:text-center text-start gap-4 md:gap-0">
                     <div className="w-12 h-12 md:w-20 md:h-20 shrink-0 bg-gradient-gold rounded-full flex items-center justify-center text-brand-dark md:mx-auto md:mb-8 shadow-[0_0_30px_rgba(212,175,55,0.4)] relative">
-                      <div className="absolute inset-0 bg-brand-primary scale-[1.5] rounded-full opacity-20 animate-ping" />
+                      <div className="absolute inset-0 bg-brand-primary scale-[1.5] rounded-full opacity-20 animate-ping" aria-hidden="true" />
                       <MapPin size={24} className="md:w-8 md:h-8" />
                     </div>
                     <div className="flex-1 min-w-0">

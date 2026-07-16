@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useInView, animate } from 'motion/react';
 import { stats } from '../data/stats';
 
@@ -27,7 +27,7 @@ function AnimatedCounter({ value, decimals = 0, prefix = "", suffix = "" }: { va
 export default function Stats() {
   return (
     <section className="py-24 bg-brand-dark/95 relative border-y border-brand-primary/20">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2694&auto=format&fit=crop')] opacity-[0.03] mix-blend-screen bg-cover bg-center pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2694&auto=format&fit=crop')] opacity-[0.03] mix-blend-screen bg-cover bg-center pointer-events-none" aria-hidden="true" />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -35,7 +35,7 @@ export default function Stats() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-serif font-bold text-white mb-4"
+            className="text-3xl md:text-5xl font-serif font-bold text-white mb-4 tracking-tight"
           >
             أرقام <span className="text-gradient-gold">نفتخر بها</span>
           </motion.h2>
@@ -58,9 +58,9 @@ export default function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="glass-dark p-6 md:p-10 rounded-[2rem] border border-brand-light/5 hover:border-brand-primary/30 transition-all duration-500 text-center group flex flex-col items-center justify-center relative overflow-hidden active:scale-95 md:hover:-translate-y-2"
+              className="glass-dark p-6 md:p-10 rounded-[2rem] border border-brand-light/[0.04] hover:border-brand-primary/20 transition-all duration-500 text-center group flex flex-col items-center justify-center relative overflow-hidden active:scale-[0.98] md:hover:-translate-y-1"
             >
-              <div className="absolute inset-0 bg-brand-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" />
+              <div className="absolute inset-0 bg-brand-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" aria-hidden="true" />
               
               <div className="w-12 h-12 md:w-16 md:h-16 rounded-full glass flex items-center justify-center text-brand-primary mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-black/20 relative z-10">
                 <stat.icon size={24} className="md:w-8 md:h-8" strokeWidth={1.5} />

@@ -1,9 +1,9 @@
-import React from 'react';
+
 import { Coffee } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-dark text-brand-light/50 py-16 border-t border-brand-light/5 relative overflow-hidden">
+    <footer className="bg-brand-dark text-brand-light/50 py-16 border-t border-brand-light/[0.04] relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-12 border-b border-brand-light/10 mb-8">
           <div className="flex items-center gap-4">
@@ -17,10 +17,10 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-wrap justify-center gap-6 md:gap-10 font-medium text-brand-light/70">
-            <a href="#services" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all">الخدمات</a>
-            <a href="#about" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all">القصة</a>
-            <a href="#quality" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all">الجودة</a>
-            <a href="#testimonials" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all">الآراء</a>
+            <a href="#services" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all duration-300">الخدمات</a>
+            <a href="#about" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all duration-300">القصة</a>
+            <a href="#quality" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all duration-300">الجودة</a>
+            <a href="#testimonials" className="hover:text-brand-primary hover:-translate-y-0.5 transition-all duration-300">الآراء</a>
           </div>
         </div>
         

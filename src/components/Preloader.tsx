@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { motion, AnimatePresence } from 'motion/react';
 import { Coffee } from 'lucide-react';
 
@@ -14,6 +14,9 @@ export default function Preloader({ isPreloading }: PreloaderProps) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
           className="fixed inset-0 z-[200] bg-brand-dark flex flex-col items-center justify-center"
+          role="status"
+          aria-live="polite"
+          aria-label="جاري تحميل الصفحة"
         >
           <div className="relative w-32 h-32 flex items-center justify-center">
             {/* Outer spinning ring */}

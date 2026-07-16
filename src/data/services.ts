@@ -1,6 +1,13 @@
-import { Coffee, Clock, CheckCircleIcon, BoxSelect, Nut, SlidersHorizontal } from 'lucide-react';
+import { type LucideIcon, Coffee, Clock, CheckCircleIcon, BoxSelect, Nut, SlidersHorizontal } from 'lucide-react';
 
-export const services = [
+export interface Service {
+  title: string;
+  desc: string;
+  icon: LucideIcon;
+  waMessage: string;
+}
+
+export const services: Service[] = [
   { title: "حبوب بن طازجة", desc: "أجود أنواع البن المستورد والمحمص بعناية فائقة للحفاظ على الزيوت العطرية والنكهة الأصيلة.", icon: Coffee, waMessage: "السلام عليكم، أريد الاستفسار عن حبوب البن الطازجة." },
   { title: "طحن يومي فوري", desc: "نضمن لك طحن القهوة فور طلبك للحفاظ على أقصى درجات النضارة والرائحة الزكية.", icon: Clock, waMessage: "السلام عليكم، أريد الاستفسار عن الطحن اليومي." },
   { title: "بن محوج", desc: "خلطات قهوة تركية أصيلة بدرجات تحميص متعددة، محوجة بعناية حسب رغبتك.", icon: CheckCircleIcon, waMessage: "السلام عليكم، أريد الاستفسار عن البن المحوج." },

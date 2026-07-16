@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Coffee, MessageCircle, ShieldCheck } from 'lucide-react';
+import { getWhatsAppUrl } from '../data/config';
 
 interface HeaderProps {
   whatsappNumber: string;
@@ -10,8 +11,8 @@ interface HeaderProps {
 
 export default function Header({ whatsappNumber, isHeroInView, hasMounted }: HeaderProps) {
   return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#120a06]/40 backdrop-blur-2xl backdrop-saturate-150 border-b border-[#c8a54b]/10 shadow-lg">
+    <header>
+      <nav aria-label="القائمة الرئيسية" className="fixed top-0 left-0 right-0 z-50 bg-[#120a06]/50 backdrop-blur-2xl backdrop-saturate-150 border-b border-[#c8a54b]/5 shadow-[0_1px_20px_rgba(0,0,0,0.3)]">
         <div className="container mx-auto px-4 md:px-6 h-24 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -33,10 +34,10 @@ export default function Header({ whatsappNumber, isHeroInView, hasMounted }: Hea
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hidden lg:flex items-center gap-10 text-sm font-medium text-brand-light/80"
           >
-            <a href="#services" className="hover:text-brand-primary transition-all hover:scale-105">الخدمات</a>
-            <a href="#about" className="hover:text-brand-primary transition-all hover:scale-105">القصة</a>
-            <a href="#testimonials" className="hover:text-brand-primary transition-all hover:scale-105">الآراء</a>
-            <a href="#gallery" className="hover:text-brand-primary transition-all hover:scale-105">الرؤية</a>
+            <a href="#services" className="hover:text-brand-primary transition-colors duration-300 tracking-wide">الخدمات</a>
+            <a href="#about" className="hover:text-brand-primary transition-colors duration-300 tracking-wide">القصة</a>
+            <a href="#testimonials" className="hover:text-brand-primary transition-colors duration-300 tracking-wide">الآراء</a>
+            <a href="#gallery" className="hover:text-brand-primary transition-colors duration-300 tracking-wide">الرؤية</a>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -45,10 +46,10 @@ export default function Header({ whatsappNumber, isHeroInView, hasMounted }: Hea
             className="flex items-center gap-4"
           >
             <a 
-              href={`https://wa.me/2${whatsappNumber}`}
+              href={getWhatsAppUrl(whatsappNumber)}
               target="_blank"
               rel="noreferrer"
-              className="hidden md:flex items-center gap-2 bg-gradient-gold text-brand-dark px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] transition-all hover:-translate-y-0.5"
+              className="hidden md:flex items-center gap-2 bg-gradient-gold text-brand-dark px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] transition-all duration-300 hover:-translate-y-0.5"
             >
               <MessageCircle size={18} />
               واتساب
@@ -77,11 +78,11 @@ export default function Header({ whatsappNumber, isHeroInView, hasMounted }: Hea
             ].map((item, index, arr) => (
               <React.Fragment key={index}>
                 <div className="flex items-center gap-2 hover:text-brand-primary cursor-default transition-colors">
-                  <ShieldCheck size={16} className="text-brand-primary" />
+                  <ShieldCheck size={16} className="text-brand-primary" aria-hidden="true" />
                   <span>{item}</span>
                 </div>
                 {index < arr.length - 1 && (
-                  <div className="w-1 h-1 rounded-full bg-brand-primary/40" />
+                  <div className="w-1 h-1 rounded-full bg-brand-primary/40" aria-hidden="true" />
                 )}
               </React.Fragment>
             ))}
@@ -95,13 +96,13 @@ export default function Header({ whatsappNumber, isHeroInView, hasMounted }: Hea
                 "جودة مضمونة"
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-1">
-                  <ShieldCheck size={12} className="text-brand-primary shrink-0" />
+                  <ShieldCheck size={12} className="text-brand-primary shrink-0" aria-hidden="true" />
                   <span className="truncate">{item}</span>
                 </div>
              ))}
           </div>
         </div>
       </motion.div>
-    </>
+    </header>
   );
 }

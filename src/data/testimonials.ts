@@ -1,4 +1,9 @@
-export const testimonials = [
+export interface Testimonial {
+  name: string;
+  text: string;
+}
+
+export const testimonials: Testimonial[] = [
   {
     name: "أحمد م.",
     text: "من أفضل أنواع البن اللي جربتها، الريحة قوية والطعم مظبوط جداً. بقى هو البن الأساسي عندي في البيت."
